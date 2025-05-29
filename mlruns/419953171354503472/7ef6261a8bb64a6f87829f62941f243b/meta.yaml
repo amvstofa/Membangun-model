@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/419953171354503472/7ef6261a8bb64a6f87829f62941f243b/artifacts
+end_time: 1748506718725
+entry_point_name: ''
+experiment_id: '419953171354503472'
+lifecycle_stage: active
+run_id: 7ef6261a8bb64a6f87829f62941f243b
+run_name: SVM_Tuning_Model
+run_uuid: 7ef6261a8bb64a6f87829f62941f243b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1748506711651
+status: 3
+tags: []
+user_id: Ahmad Musthofanur
