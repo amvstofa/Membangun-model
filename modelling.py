@@ -4,34 +4,33 @@ import pandas as pd
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-import os
 
-# Atur URI tracking dan nama eksperimen
+# Set MLflow URI dan eksperimen
 mlflow.set_tracking_uri("http://127.0.0.1:5000/")
-# Create a new MLflow Experiment
 mlflow.set_experiment("Obesity Modeling - SVM")
- 
+
+# Aktifkan autologging untuk scikit-learn
+mlflow.autolog()
+
+# Load dataset
 X_train = pd.read_csv("data_preprocessing/X_train.csv")
 X_test = pd.read_csv("data_preprocessing/X_test.csv")
 y_train = pd.read_csv("data_preprocessing/y_train.csv")
 y_test = pd.read_csv("data_preprocessing/y_test.csv")
- 
-input_example = X_train[0:5]
+
+# Konversi y_train dan y_test ke Series
+y_train = y_train.values.ravel()
+y_test = y_test.values.ravel()
+
 # Mulai MLflow run
 with mlflow.start_run(run_name="SVM_Model"):
-    # latih model 
-    model = SVC()  
+    # Latih model
+    model = SVC()
     model.fit(X_train, y_train)
 
-    # Log model ke MLflow
-    mlflow.sklearn.log_model(
-        sk_model=model,
-        artifact_path="model",
-        input_example=input_example
-    )
+    # Evaluasi model
+    predictions = model.predict(X_test)
+    accuracy = accuracy_score(y_test, predictions)
 
-    # Evaluasi dan log akurasi
-    accuracy = accuracy_score(y_test, model.predict(X_test))
-    mlflow.log_metric("accuracy", accuracy)
-
+    # Autolog sudah mencatat metrik dan model, jadi print saja hasilnya
     print(f"Akurasi model (default SVC): {accuracy:.4f}")
