@@ -1,6 +1,0 @@
-artifact_location: mlflow-artifacts:/419953171354503472
-creation_time: 1748506469050
-experiment_id: '419953171354503472'
-last_update_time: 1748506469050
-lifecycle_stage: active
-name: Obesity Modeling - Hyperparameter Tuning SVM
